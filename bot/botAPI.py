@@ -2,6 +2,7 @@ import json
 import apiai
 import urllib.request
 from urllib.parse import quote_plus
+from textToSpeech import *
 
 CLIENT_ACCESS_TOKEN = '07dffa75a2404bc59cb0101655d300e9'
 
@@ -28,3 +29,5 @@ while True:
     user_input = str(input("User: "))
     bot_response = botResponseReciever(user_input)
     print("\nVision: " + str(bot_response))
+    speakText(bot_response)
+    
