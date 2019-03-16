@@ -4,21 +4,25 @@ import time
 class Addition:
 
     def __init__(self):
-        self.num = 0
+        self.flag = 0
+        self.buffer = ""
 
-    def add1(self):
+    def userProgram(self):
         while True:
-            self.num += 1
-            print(self.num)
+            usr_input = input("User:")
+            self.buffer = usr_input
+            self.flag = 1
             time.sleep(1)
 
-    def add2(self):
+    def processingProg(self):
         while True:
-            self.num += 2
-            print(self.num)
+            if self.flag is 1:
+                buffer = self.buffer
+                print("Server recieved " + buffer)
+                self.flag = 0
             time.sleep(1)
 
 if __name__ == '__main__':
     a = Addition() 
-    Thread(target=a.add1).start()
-    Thread(target=a.add2).start()
+    Thread(target=a.userProgram).start()
+    Thread(target=a.processingProg).start()

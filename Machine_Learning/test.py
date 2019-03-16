@@ -1,3 +1,3 @@
 from bot.botAPI import *
 
-botResponseReciever("Hi !")
+botResponseReciever("HI !")
