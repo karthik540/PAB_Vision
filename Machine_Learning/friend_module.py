@@ -1,5 +1,6 @@
 import face_recognition
 import cv2
+from bot.botAPI import *
 
 video_capture = cv2.VideoCapture(0)
 
@@ -63,8 +64,10 @@ while True:
             if True in matches:
                 first_match_index = matches.index(True)
                 name = known_face_names[first_match_index]
-
             face_names.append(name)
+            if not name is "Unknown":
+                botResponseReciever("Friend " + name)
+            
 
     process_this_frame = not process_this_frame
 

@@ -2,9 +2,18 @@ import json
 import apiai
 import urllib.request
 from urllib.parse import quote_plus
-from textToSpeech import *
+#from speechOutput import *
+from win32com.client import Dispatch
+
+
+speak = Dispatch("SAPI.SpVoice")
 
 CLIENT_ACCESS_TOKEN = '07dffa75a2404bc59cb0101655d300e9'
+
+def textToSpeech(message):    
+    speak.Speak(message)
+    return
+
 
 def botResponseReciever(queryMessage):
     ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
@@ -22,12 +31,13 @@ def botResponseReciever(queryMessage):
     jsonData = rawData[0:-1]                        #Remove ' in the end
 
     data = json.loads(jsonData)
-    return data['result']['fulfillment']['speech'] + "\n"
-
+    textToSpeech(data['result']['fulfillment']['speech'])
+#botResponseReciever("Friend Karthik")
+"""
 while True:
     #print("User: ")
     user_input = str(input("User: "))
     bot_response = botResponseReciever(user_input)
     print("\nVision: " + str(bot_response))
     speakText(bot_response)
-    
+""" 
