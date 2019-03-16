@@ -33,11 +33,15 @@ def botResponseReciever(queryMessage):
     data = json.loads(jsonData)
     textToSpeech(data['result']['fulfillment']['speech'])
 #botResponseReciever("Friend Karthik")
-"""
-while True:
-    #print("User: ")
-    user_input = str(input("User: "))
-    bot_response = botResponseReciever(user_input)
-    print("\nVision: " + str(bot_response))
-    speakText(bot_response)
-""" 
+
+def userProgram(varia):
+    while True:
+        user_input = str(input("User: "))
+        bot_response = botResponseReciever(user_input)
+        print("\nVision: " + str(bot_response))
+        speakText(bot_response)
+
+if __name__ == '__main__':
+    userProgram()
+    
+ 

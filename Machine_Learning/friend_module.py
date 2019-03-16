@@ -19,7 +19,6 @@ for i in range(0,2):
     l = face_recognition.load_image_file("../pics/"+str(i)+".jpeg")
     j = face_recognition.face_encodings(l)[0]
     known_face_encodings.append(j)
-
     
     
 # Create arrays of known face encodings and their names
@@ -27,16 +26,26 @@ for i in range(0,2):
     obama_face_encoding,
     biden_face_encoding
 ]'''
+
 known_face_names = [
     "Karthik",
     "Harsh"
 ]
 
+
+
 # Initialize some variables
 face_locations = []
 face_encodings = []
 face_names = []
+face_list = {}
 process_this_frame = True
+
+# Setting the face availabililty
+for name in known_face_names:
+    face_list[name] = 0
+
+
 
 while True:
     # Grab a single frame of video
@@ -66,7 +75,9 @@ while True:
                 name = known_face_names[first_match_index]
             face_names.append(name)
             if not name is "Unknown":
-                botResponseReciever("Friend " + name)
+                if face_list[name] is 0:
+                    face_list[name] = 1
+                    botResponseReciever("Friend " + name)
             
 
     process_this_frame = not process_this_frame
