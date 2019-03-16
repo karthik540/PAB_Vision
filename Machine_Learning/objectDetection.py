@@ -1,6 +1,6 @@
 import face_recognition
 import cv2
-from bot.botAPI import *
+from Machine_Learning.bot.botAPI import *
 
 class object_detect:
 
@@ -9,7 +9,7 @@ class object_detect:
         self.known_face_encodings = []
         self.i = 0
         for i in range(0,2):
-            l = face_recognition.load_image_file("../pics/"+str(i)+".jpeg")
+            l = face_recognition.load_image_file("./pics/"+str(i)+".jpeg")
             j = face_recognition.face_encodings(l)[0]
             self.known_face_encodings.append(j)
         self.known_face_names = [
@@ -81,22 +81,22 @@ class object_detect:
         # Display the resulting image
         cv2.imshow('Video', frame)
 
-obj = object_detect()
 
 def initializer():
     obj = object_detect()
 
 def render_looper():
     obj.render_frame()
-    
-if __name__ == "__main__":    
+"""
+if __name__ == "__main__": 
+    obj = object_detect()   
     while True:
         obj.render_frame()
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        # Release handle to the webcam
-        obj.video_capture.release()
-        cv2.destroyAllWindows()
-
+    # Release handle to the webcam
+    obj.video_capture.release()
+    cv2.destroyAllWindows()
+"""
         
         

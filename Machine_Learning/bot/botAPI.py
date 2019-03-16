@@ -39,6 +39,7 @@ def userProgram():
     user_input = str(input("User: "))
     bot_response = botResponseReciever(user_input)
     print("\nVision: " + str(bot_response))
+    return user_input
 
 """
 if __name__ == '__main__':
