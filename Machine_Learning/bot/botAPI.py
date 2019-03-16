@@ -5,7 +5,6 @@ from urllib.parse import quote_plus
 #from speechOutput import *
 from win32com.client import Dispatch
 
-
 speak = Dispatch("SAPI.SpVoice")
 
 CLIENT_ACCESS_TOKEN = '07dffa75a2404bc59cb0101655d300e9'
@@ -31,7 +30,7 @@ def botResponseReciever(queryMessage):
     jsonData = rawData[0:-1]                        #Remove ' in the end
 
     data = json.loads(jsonData)
-    textToSpeech(data['result']['fulfillment']['speech'])
+    #textToSpeech(data['result']['fulfillment']['speech'])
     return data['result']['fulfillment']['speech']
 #botResponseReciever("Friend Karthik")
 
@@ -41,9 +40,8 @@ def userProgram():
     print("\nVision: " + str(bot_response))
     return user_input
 
-"""
 if __name__ == '__main__':
-    while True:
+	while True:
 		userProgram()   
-"""
+
  
