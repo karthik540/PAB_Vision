@@ -1,5 +1,5 @@
 from threading import Thread
-import cv2 , time
+import cv2 , time , re
 from Machine_Learning.bot.botAPI import *
 from Machine_Learning.objectDetection import *
 
@@ -21,13 +21,17 @@ class interface:
     
     def user_function(self):
         while True:
-            uinput = userProgram()
+            uinput = str(userProgram())
             if uinput in "launch":
                 self.buffer = "render"   
                 self.flag = 1
             elif uinput in "sleep":
                 self.buffer = "sleep"   
                 self.flag = 1
+            elif re.search("^remember" , uinput):
+                self.buffer = uinput
+                self.flag = 1
+                print("comes here atleast !")
             
             print(self.flag)
             
@@ -37,12 +41,18 @@ class interface:
         render_flag = 0
         while True:
             if self.flag is 1:
-                if self.buffer is "render":
+                
+                if self.buffer in "render":
                     render_flag = 1
-                elif self.buffer is "sleep":
+                elif self.buffer in "sleep":
                     render_flag = 0
+                elif re.search("^remember" , self.buffer):
+                    print("comes here atleast !")
+                    self.buffer = self.buffer.replace("remember " , "")
+                    self.obj.new_friend(self.buffer)
+                    
                 self.flag = 0 
-            if render_flag is 1:
+            if render_flag == 1:
                 self.obj.render_frame()
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break

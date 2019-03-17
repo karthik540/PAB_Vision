@@ -8,10 +8,7 @@ class object_detect:
         self.video_capture = cv2.VideoCapture(0)
         self.known_face_encodings = []
         self.i = 0
-        for i in range(0,2):
-            l = face_recognition.load_image_file("./pics/"+str(i)+".jpeg")
-            j = face_recognition.face_encodings(l)[0]
-            self.known_face_encodings.append(j)
+        
         self.known_face_names = [
             "Karthik",
             "Harsh"
@@ -22,8 +19,34 @@ class object_detect:
         self.face_list = {}
         self.process_this_frame = True
 
+        for i in range(0,str(((len(self.known_face_names) - 1)))):
+            l = face_recognition.load_image_file("./pics/"+str(i)+".jpeg")
+            print(len(face_recognition.face_encodings(l)))
+            j = face_recognition.face_encodings(l)[0]
+            self.known_face_encodings.append(j)
+        
         for name in self.known_face_names:
             self.face_list[name] = 0
+
+        
+    def re_render(self , buffer):
+        self.known_face_names.append(buffer)
+        print(len(self.known_face_names))
+        
+        l = face_recognition.load_image_file("./pics/"+ str((len(self.known_face_names) - 1)) +".jpeg")
+        j = face_recognition.face_encodings(l)[0]
+        self.known_face_encodings.append(j)
+        
+        for name in self.known_face_names:
+            self.face_list[name] = 0
+        
+    
+    def new_friend(self , buffer):
+        print("comes here 1")
+        ret, frame = self.video_capture.read()
+        index = len(self.known_face_names)
+        cv2.imwrite("./pics/" + str(index) + ".jpeg" , frame)  
+        self.re_render(buffer)
     
     def render_frame(self):
         # Grab a single frame of video

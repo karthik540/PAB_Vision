@@ -30,7 +30,7 @@ def botResponseReciever(queryMessage):
     jsonData = rawData[0:-1]                        #Remove ' in the end
 
     data = json.loads(jsonData)
-    #textToSpeech(data['result']['fulfillment']['speech'])
+    textToSpeech(data['result']['fulfillment']['speech'])
     return data['result']['fulfillment']['speech']
 #botResponseReciever("Friend Karthik")
 
