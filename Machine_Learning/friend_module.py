@@ -1,7 +1,7 @@
 import face_recognition
 import cv2
 from bot.botAPI import *
-
+import numpy as np
 video_capture = cv2.VideoCapture(0)
 
 # Load a sample picture and learn how to recognize it.
@@ -29,8 +29,9 @@ for i in range(0,2):
 ]'''
 
 known_face_names = [
-    "Karthik",
-    "Harsh"
+    "Harsh",
+    "Adwaith",
+    "Unknown"
 ]
 
 
@@ -55,7 +56,8 @@ while True:
     small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
     # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-    rgb_small_frame = small_frame[:, :, ::-1]
+    # rgb_small_frame = small_frame[:, :, ::-1]
+    rgb_small_frame = np.ascontiguousarray(small_frame[:, :, ::-1])
 
     # Only process every other frame of video to save time
     if process_this_frame:
@@ -75,10 +77,11 @@ while True:
                 name = known_face_names[first_match_index]
 
             face_names.append(name)
+
             if not name is "Unknown":
-                if face_list[name] is 0:
+                if face_list[name] == 0:
                     face_list[name] = 1
-                    botResponseReciever("Friend " + name)
+                    print("This is the name" + name)
             
 
     process_this_frame = not process_this_frame
@@ -110,3 +113,4 @@ while True:
 # Release handle to the webcam
 video_capture.release()
 cv2.destroyAllWindows()
+

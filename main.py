@@ -3,14 +3,6 @@ import cv2 , time , re
 from Machine_Learning.bot.botAPI import *
 from Machine_Learning.objectDetection import *
 
-"""
-varia = "Hi !"
-
-if __name__ == '__main__':
-    Thread(target=userProgram,args=[varia]).start()
-
-"""
-
 
 class interface:
 
@@ -40,7 +32,7 @@ class interface:
     def process_function(self):        
         render_flag = 0
         while True:
-            if self.flag is 1:
+            if self.flag == 1:
                 
                 if self.buffer in "render":
                     render_flag = 1
@@ -56,7 +48,7 @@ class interface:
                 self.obj.render_frame()
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-            if render_flag is 0:
+            if render_flag == 0:
                 cv2.destroyAllWindows()
 
 

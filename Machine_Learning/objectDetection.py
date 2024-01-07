@@ -19,7 +19,7 @@ class object_detect:
         self.face_list = {}
         self.process_this_frame = True
 
-        for i in range(0,str(((len(self.known_face_names) - 1)))):
+        for i in range(0,len(self.known_face_names) - 1):
             l = face_recognition.load_image_file("./pics/"+str(i)+".jpeg")
             print(len(face_recognition.face_encodings(l)))
             j = face_recognition.face_encodings(l)[0]
